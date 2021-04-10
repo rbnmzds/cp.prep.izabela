@@ -9,7 +9,8 @@ function minutosASegundos(minutos) {
   // minutosASegundos(5) => 300
   // minutosASegundos(3) => 180
   // Tu código aca:
-
+// Se declara la funcion para que retorne el valor convertido a segundos
+  return minutos*60
 }
 
 function promedio(array) {
@@ -21,7 +22,12 @@ function promedio(array) {
   // Nota: Los numeros estan ordenados de menor a mayor.
 
   // Tu código aca:
-
+//Se declara la funcion para que devuelva el valor promedio de los elementos del arreglo de entrada
+  suma=0;
+  for(let i=0;i<array.length;i++){
+    suma=suma+array[i];
+  }
+  return suma/array.length
 }
 
 function salarioAnual(empleados, nombre) {
@@ -45,7 +51,12 @@ function salarioAnual(empleados, nombre) {
   // salarioAnual(empleados, 'Flor'); => 48000
   // salarioAnual(empleados, 'Manuel;); => 12000
   // Tu código aca:
-
+  //Se declara la funcion para el calculo del salario anual con argumentos de entrada {1:array, 2:nombre del empleado}
+    for (i=0;i<empleados.length;i++){
+      if(empleados[i].nombre===nombre){
+        return empleados[i].salario*12;
+      }
+    }
 }
 
 function encontrarLaPalabra(string) {
@@ -56,7 +67,15 @@ function encontrarLaPalabra(string) {
   // encontrarLaBomba('hola que tal, como va?!') => false;
 
   // Tu código:
-
+  //Se declara una funcion que devuelve true en caso de que el string que ingresa a la funcion sea 'bienvenidos a henry' y false en caso de que el string sea 'hola que tal, como va?!'
+  var prueba='henry';
+  var resultado=false;
+  for(i=0;i<string.length-4;i++){
+    if(string[i]===prueba[0]&&string[i+1]===prueba[1]&&string[i+2]===prueba[2]&&string[i+3]===prueba[3]&&string[i+4]===prueba[4]){
+      resultado=true;
+    }
+  }
+  return resultado
 }
 
 function index() {
@@ -73,7 +92,21 @@ function index() {
   // numeros.encontraIndex(23) debe devolver -1 ya que ese elemento no existe en ese array.
 
   // Tu código aca:
-
+  // Se declara un metodo (encontraIndex) en el prototipo de array para la funcion de buscar el index, el cual se puede usar en ambos arreglos: strings y numeros
+  Array.prototype.encontraIndex=function(val){
+    contador=0;
+    for(i=0;i<this.length;i++){
+      if(this[i]===val){
+        contador=contador+1;
+      }
+    }
+    if(contador!==0){
+      return contador
+    }
+    else{
+      return -1
+    }
+  }
 };
 
 
@@ -85,22 +118,30 @@ function crearClaseEmpleado() {
   // Esta funcion debe retonar la clase Persona.
 
   class Empleado {
-    constructor() {
-
+    constructor(nombre, salario, tareas, jefe) {
+      this.nombre = nombre;
+      this.salario = salario;
+      this.tareas = tareas;
+      this.jefe = jefe || false;
     }
 
     addTarea(tarea, prioridad) {
       // el metodo addTarea recibe un string tarea y un entero prioridad y debe agregar un objeto:
       // { tarea: tarea, prioridad: prioridad} al arreglo de tareas del empleado.
       // no debe retornar nada.
-      
+      this.tareas.push({'prioridad':prioridad,'tarea':tarea});
     }
 
     switchJefe() {
       // este método debe switchear el booleano jefe, si estaba en true, dejarlo en false
       // y si estaba en false, dejarlo en true
       // no debe retornar nada.
-      
+      if(this.jefe===true){
+        this.jefe=false;
+      }
+      else{
+        this.jefe=true;
+      }
     }
     getTareas() {
       // Escribe una función que retorne un arreglo con sólo los nombres (tarea) del arreglo de tareas
@@ -112,7 +153,10 @@ function crearClaseEmpleado() {
       //  ];
       // Ej:
       // persona.getTareas() // retorna ['compras', 'dar clases', 'operaciones']
-      
+      var hw= this.tareas.map(function(element){
+        return element.tarea
+      })
+      return hw
     }
 
     getTareasPrioritarias(prioridad) {
@@ -132,7 +176,13 @@ function crearClaseEmpleado() {
       //  nombre: 'compras',
       //  prioridad: 4,
       // }]
-      
+      var hwp=[];
+      this.tareas.forEach(function (element){
+        if (element.prioridad>prioridad){
+          hwp.push(element);
+        }
+      })
+      return hwp
     }
 
   };
@@ -160,7 +210,9 @@ function filtrar(funcion) {
   // productos.filtrar(function(p) {
   //   return p.price >= 50;
   // }) => [{price: 100, name:'tv'}]
-  
+  Array.prototype.filtrar=function(){
+
+  }
   
 };
 
