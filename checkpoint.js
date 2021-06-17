@@ -210,10 +210,19 @@ function filtrar(funcion) {
   // productos.filtrar(function(p) {
   //   return p.price >= 50;
   // }) => [{price: 100, name:'tv'}]
-  Array.prototype.filtrar=function(){
-
+  Array.prototype.filtrar=function(funcion){
+    var arreglo = []
+    for(i=0;i<this.length;i++){
+      arreglo.push(funcion(this[i]));
+    }
+    newarray=[];
+    for(i=0;i<arreglo.length;i++){
+      if(arreglo[i]!==false){
+        newarray.push(this[i])
+      }
+    }
+    return newarray
   }
-  
 };
 
 // No modifiques nada debajo de esta linea
